@@ -1,5 +1,5 @@
 const express = require("express")  
-const cors = require('cors')        //  Cross-Origin Resource Sharing
+const cors = require('cors')        //  Cross-Origin Resource Sharing_
 const sqlite3 = require("sqlite3")  
 const {open} = require("sqlite")    
 const path = require("path")
