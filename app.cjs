@@ -4,6 +4,7 @@ const sqlite3 = require("sqlite3")
 const {open} = require("sqlite")    
 const path = require("path")
 const fetch = require("node-fetch");
+require('dotenv').config
 
 //  join the database path
 const databasePath = path.join(__dirname, 'ecomdata.db');
@@ -14,7 +15,7 @@ app.use(cors());        //middleware
 
 // //  Initialize database
 let db = null;
-const PORT = 3000       // port 
+const port = 3000      // port 
 
 const initializeDBandServer = async() =>{
     try{
@@ -23,8 +24,8 @@ const initializeDBandServer = async() =>{
             driver: sqlite3.Database,
         });
         
-        app.listen(PORT, () =>{
-            console.log(`Server running on http://localhost:${PORT}/`)
+        app.listen(port, () =>{
+            console.log(`Server running on http://localhost:${port}/`)
         });
     }catch(error){
         console.log(`DB Error: ${error.message}`)
@@ -222,9 +223,9 @@ app.get('/api/combined-data/', async (request, response)=>{
     try {
         const {month} = request.query;
 
-        const transactionsResponse = await fetch(`http://localhost:${PORT}${apiUrl1}?month=${month}`);
-        const StatisticsResponse = await fetch(`http://localhost:${PORT}${apiUrl2}?month=${month}`);
-        const barChartResponse = await fetch(`http://localhost:${PORT}${apiUrl3}?month=${month}`);
+        const transactionsResponse = await fetch(`http://localhost:${port}${apiUrl1}?month=${month}`);
+        const StatisticsResponse = await fetch(`http://localhost:${port}${apiUrl2}?month=${month}`);
+        const barChartResponse = await fetch(`http://localhost:${port}${apiUrl3}?month=${month}`);
         
         const transactionsJsonData = await transactionsResponse.json();
         const StatisticsJsonData = await StatisticsResponse.json();
